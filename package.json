@@ -1,0 +1,24 @@
+{
+  "name": "watch-redux",
+  "version": "1.0.0",
+  "description": "Watch Redux for granular changes",
+  "main": "index.js",
+  "scripts": {
+    "test:lint": "eslint .",
+    "test:tape": "tape test/*.js",
+    "test": "npm run test:lint && npm run test:tape"
+  },
+  "keywords": [
+    "redux",
+    "watch",
+    "observe"
+  ],
+  "author": "Ron Korving <rkorving@wizcorp.jp>",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^3.17.1",
+    "pre-commit": "^1.2.2",
+    "redux": "^3.6.0",
+    "tape": "^4.6.3"
+  }
+}
