@@ -1,6 +1,6 @@
 {
   "name": "watch-redux",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Watch Redux for granular changes",
   "main": "index.js",
   "scripts": {
