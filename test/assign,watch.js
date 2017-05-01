@@ -6,7 +6,7 @@ var assign = require('../reduce/assign');
 
 test('assign(), watch()', function (t) {
 	var initialState = {
-		foo: 1,
+		foo: 0,
 		bar: 'hello world'
 	};
 
@@ -23,7 +23,7 @@ test('assign(), watch()', function (t) {
 	var dispatchCount = 0;
 
 	// watchers trigger immediately
-	watchRedux.watch({
+	var watcher = watchRedux.watch({
 		watch: function (state) {
 			return {
 				root: state
@@ -36,12 +36,15 @@ test('assign(), watch()', function (t) {
 		if (dispatchCount === 0) {
 			// initial trigger
 
+			t.equal(output, 0);
+		} else if (dispatchCount === 1) {
+			// trigger after dispatch 1
+
 			t.equal(output, 1);
 		} else if (dispatchCount === 2) {
 			// trigger after dispatch 2
 
-			t.equal(output, 2);
-			t.end();
+			t.equal(output, 3);
 		} else {
 			t.fail('dispatchCount === ' + dispatchCount);
 		}
@@ -51,13 +54,23 @@ test('assign(), watch()', function (t) {
 	dispatchCount += 1;
 	store.dispatch({
 		type: 'INC_FOO',
-		amount: 0
+		amount: 1
 	});
 
 	// this change should cause our watcher to trigger
 	dispatchCount += 1;
 	store.dispatch({
 		type: 'INC_FOO',
-		amount: 1
+		amount: 2
 	});
+
+	watcher.destroy(); // more dispatches should not invoke our watcher callback anymore
+
+	dispatchCount += 1;
+	store.dispatch({
+		type: 'INC_FOO',
+		amount: 2
+	});
+
+	t.end();
 });

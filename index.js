@@ -19,5 +19,5 @@ exports.watch = function (selector, cb) {
 		throw new Error('Please run .setup(store) before calling .watch()');
 	}
 
-	watchers.watchSelector(store.getState(), selector, cb);
+	return watchers.watchSelector(store.getState(), selector, cb);
 };

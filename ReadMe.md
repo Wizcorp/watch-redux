@@ -120,10 +120,15 @@ var userNameSelector = {
 	}
 };
 
-watchRedux.watch(userNameSelector, function (name) {
+var watcher = watchRedux.watch(userNameSelector, function (name) {
 	console.log('My name is now:', name);
 });
+
+watcher.destroy();
 ```
+
+Once you have no longer need to watch the selector, you may call `.destroy()` on the watcher object returned by
+`watchRedux.watch(...)`. Your watcher callback will never be invoked again.
 
 ### License
 

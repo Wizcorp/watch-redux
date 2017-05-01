@@ -13,5 +13,5 @@ exports.notify = function (changes) {
 };
 
 exports.watchSelector = function (globalState, selector, cb) {
-	selectorWatchers.watch(globalState, selector, cb);
+	return selectorWatchers.watch(globalState, selector, cb);
 };
